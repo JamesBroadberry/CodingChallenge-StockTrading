@@ -26,5 +26,17 @@ namespace StockTrading.DataAccess.DataAccess
             _orders.Add(orderToAdd);
             return orderToAdd;
         }
+
+        public Order UpdateOrder(Order orderToUpdate)
+        {
+            var foundOrderIndex = _orders.FindIndex(x => x.Id == orderToUpdate.Id);
+            if (foundOrderIndex == -1)
+            {
+                return null;
+            }
+
+            _orders[foundOrderIndex] = orderToUpdate;
+            return _orders[foundOrderIndex];
+        }
     }
 }

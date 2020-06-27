@@ -9,5 +9,7 @@ namespace StockTrading.DataAccess.DataAccess
         Order GetOrderById(Guid orderId);
         IEnumerable<Order> GetProcessingOrders();
         Order AddOrder(Order orderToAdd);
+        Order UpdateOrder(Order orderToUpdate);
+
     }
 }

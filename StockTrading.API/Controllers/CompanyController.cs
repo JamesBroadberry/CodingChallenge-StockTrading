@@ -24,7 +24,7 @@ namespace StockTrading.API.Controllers
             return _companyService.GetCompanies();
         }
 
-        [HttpPost("{companySymbol}")]
+        [HttpPost("{companySymbol}/shares")]
         public Order IssueShare(string companySymbol, [FromBody] IssueSharesRequest request)
         {
             var sharesIssuedOrder = _companyService.IssueShares(companySymbol, request.Quantity, request.Price);

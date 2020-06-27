@@ -30,6 +30,7 @@ namespace StockTrading.BusinessLogic
             {
                 return null;
             }
+
             var orderToAdd = new Order(companySymbol, price, price, quantity, OrderType.Sell);
 
             var orderAdded = _orderContext.AddOrder(orderToAdd);

@@ -25,14 +25,14 @@ namespace StockTrading.API
             _companyService.AddCompany(new Company { Symbol = "BLKFNCH" });
             
             // Set up company initial shares
-            _companyService.IssueShares("AMZN", 100000, 40);
-            _companyService.IssueShares("TSLA", 10000, 200);
-            _companyService.IssueShares("BLKFNCH", 600, 60);
+            //_companyService.IssueShares("AMZN", 100000, 40);
+            //_companyService.IssueShares("TSLA", 10000, 200);
+            //_companyService.IssueShares("BLKFNCH", 600, 60);
 
-            // Set up starting orders
-            _orderService.AddOrder(new Order("AMZN", 40, 40, 100, OrderType.Buy));
-            _orderService.AddOrder(new Order("TSLA", 200, 200, 2000, OrderType.Buy));
-            _orderService.AddOrder(new Order("BLKFNCH", 60, 60, 300, OrderType.Buy));
+            //// Set up starting orders
+            //_orderService.AddOrder(new Order("AMZN", 40, 40, 100, OrderType.Buy));
+            //_orderService.AddOrder(new Order("TSLA", 200, 200, 2000, OrderType.Buy));
+            //_orderService.AddOrder(new Order("BLKFNCH", 60, 60, 300, OrderType.Buy));
 
             return Task.CompletedTask;
         }
