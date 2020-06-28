@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.BusinessLogic", "StockTrading.BusinessLogic\StockTrading.BusinessLogic.csproj", "{CAE61601-FE0B-42ED-B096-CE9813D8B6DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockTrading.BusinessLogic.Test", "StockTrading.BusinessLogic.Test\StockTrading.BusinessLogic.Test.csproj", "{F0C3CEF9-6CAE-4012-AE05-70FF276F0E7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockTrading.BusinessLogic.Test", "StockTrading.BusinessLogic.Test\StockTrading.BusinessLogic.Test.csproj", "{F0C3CEF9-6CAE-4012-AE05-70FF276F0E7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
