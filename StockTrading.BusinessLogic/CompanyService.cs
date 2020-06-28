@@ -4,6 +4,7 @@ using StockTrading.DataAccess.Models;
 
 namespace StockTrading.BusinessLogic
 {
+    ///<inheritdoc />
     public class CompanyService : ICompanyService
     {
         private readonly ICompanyContext _companyContext;
@@ -14,16 +15,19 @@ namespace StockTrading.BusinessLogic
             _orderContext = orderContext;
         }
 
+        ///<inheritdoc />
         public IEnumerable<Company> GetCompanies()
         {
             return _companyContext.GetCompanies();
         }
 
+        ///<inheritdoc />
         public Company GetCompany(string companySymbol)
         {
             return _companyContext.GetCompany(companySymbol);
         }
 
+        ///<inheritdoc />
         public Order IssueShares(string companySymbol, int quantity, decimal price)
         {
             if (_companyContext.GetCompany(companySymbol) == null)
@@ -38,6 +42,7 @@ namespace StockTrading.BusinessLogic
             return orderAdded;
         }
 
+        ///<inheritdoc />
         public Company AddCompany(Company company)
         {
             return _companyContext.AddCompany(company);

@@ -6,6 +6,7 @@ using StockTrading.DataAccess.Models;
 
 namespace StockTrading.BusinessLogic
 {
+    ///<inheritdoc />
     public class OrderService : IOrderService
     {
         private readonly IOrderContext _orderContext;
@@ -17,16 +18,19 @@ namespace StockTrading.BusinessLogic
             _companyContext = companyContext;
         }
 
+        ///<inheritdoc />
         public Order GetOrderById(Guid orderId)
         {
             return _orderContext.GetOrderById(orderId);
         }
 
+        ///<inheritdoc />
         public IEnumerable<Order> GetOutstandingOrders()
         {
-            return _orderContext.GetProcessingOrders();
+            return _orderContext.GetOutstandingOrders();
         }
 
+        ///<inheritdoc />
         public Order AddOrder(Order orderToAdd)
         {
             if (_companyContext.GetCompany(orderToAdd.CompanySymbol) == null)
@@ -34,7 +38,7 @@ namespace StockTrading.BusinessLogic
                 return null;
             }
 
-            var outstandingOrdersForSymbolInPriceRange = _orderContext.GetProcessingOrders()
+            var outstandingOrdersForSymbolInPriceRange = _orderContext.GetOutstandingOrders()
                 .Where(x => x.CompanySymbol == orderToAdd.CompanySymbol) // Match orders for company which matches
                 .Where(x => x.OrderType != orderToAdd.OrderType) // Only show buy orders if current is sell and vice versa
                 .Where(x => x.MinOrderPrice <= orderToAdd.MaxOrderPrice && x.MaxOrderPrice >= orderToAdd.MinOrderPrice) // Price ranges overlap

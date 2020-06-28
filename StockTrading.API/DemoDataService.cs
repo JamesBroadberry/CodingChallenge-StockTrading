@@ -6,7 +6,7 @@ using StockTrading.DataAccess.Models;
 
 namespace StockTrading.API
 {
-    public class DemoDataService: IHostedService
+    internal class DemoDataService: IHostedService
     {
         private readonly ICompanyService _companyService;
         private readonly IOrderService _orderService;
@@ -20,19 +20,19 @@ namespace StockTrading.API
         public Task StartAsync(CancellationToken cancellationToken)
         {
             // Set up companies
-            _companyService.AddCompany(new Company {Symbol = "AMZN"});
-            _companyService.AddCompany(new Company { Symbol = "TSLA"});
-            _companyService.AddCompany(new Company { Symbol = "BLKFNCH" });
-            
-            // Set up company initial shares
-            //_companyService.IssueShares("AMZN", 100000, 40);
-            //_companyService.IssueShares("TSLA", 10000, 200);
-            //_companyService.IssueShares("BLKFNCH", 600, 60);
+            _companyService.AddCompany(new Company("AMZN"));
+            _companyService.AddCompany(new Company("TSLA"));
+            _companyService.AddCompany(new Company("BLKFNCH"));
 
-            //// Set up starting orders
-            //_orderService.AddOrder(new Order("AMZN", 40, 40, 100, OrderType.Buy));
-            //_orderService.AddOrder(new Order("TSLA", 200, 200, 2000, OrderType.Buy));
-            //_orderService.AddOrder(new Order("BLKFNCH", 60, 60, 300, OrderType.Buy));
+            // Set up company initial shares
+            _companyService.IssueShares("AMZN", 100000, 40);
+            _companyService.IssueShares("TSLA", 10000, 200);
+            _companyService.IssueShares("BLKFNCH", 600, 60);
+
+            // Set up starting orders
+            _orderService.AddOrder(new Order("AMZN", 40, 40, 100, OrderType.Buy));
+            _orderService.AddOrder(new Order("TSLA", 200, 200, 2000, OrderType.Buy));
+            _orderService.AddOrder(new Order("BLKFNCH", 60, 60, 300, OrderType.Buy));
 
             return Task.CompletedTask;
         }

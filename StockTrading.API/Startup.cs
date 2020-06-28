@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockTrading.BusinessLogic;
 using StockTrading.DataAccess.DataAccess;
+#pragma warning disable 1591
 
 namespace StockTrading.API
 {
@@ -34,7 +38,13 @@ namespace StockTrading.API
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(x =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                x.IncludeXmlComments(xmlPath);
+            });
 
         }
 
