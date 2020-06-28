@@ -6,7 +6,7 @@ This coding challenge is a RESTful API based coding challenge written in C#. The
 
 - There is no concept of a user. Orders placed are anonymous and individual transactions are not recorded.
 - When a company issues shares, it's simple an abstraction of a 'sell' order where the minimum and maximum price are the same.
-- When a company issues shares, other previous orders are not adjusted for inflation.
+- When a company issues shares, other previous orders are not adjusted for percentage owned.
 - When an order is matched, the price does not matter, so long as the minimum and maximum thresholds overlap.
 - There is no complex order matching algorithm. I've assumed it to just fill the orders using the oldest as priority, so long as the price matches.
 
