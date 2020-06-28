@@ -1,0 +1,240 @@
+---
+openapi: 3.0.1
+info:
+  title: StockTrading.API
+  version: "1.0"
+paths:
+  "/api/Company":
+    get:
+      tags:
+        - Company
+      summary: Get all companies
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Company"
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Company"
+            text/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Company"
+  "/api/Company/{companySymbol}/shares":
+    post:
+      tags:
+        - Company
+      summary: Issue shares for a company
+      parameters:
+        - name: companySymbol
+          in: path
+          description: The company to issue shares for
+          required: true
+          schema:
+            type: string
+            description: The company to issue shares for
+            nullable: true
+      requestBody:
+        description: The payload containing how many shares and at what price to issue
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/IssueSharesRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/IssueSharesRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/IssueSharesRequest"
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                "$ref": "#/components/schemas/Order"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Order"
+            text/json:
+              schema:
+                "$ref": "#/components/schemas/Order"
+  "/api/Order":
+    get:
+      tags:
+        - Order
+      summary: Get all outstanding (not processed) orders
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Order"
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Order"
+            text/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Order"
+    post:
+      tags:
+        - Order
+      summary: Create a new order
+      requestBody:
+        description: The payload containing information about the order to create
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CreateOrderRequest"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/CreateOrderRequest"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/CreateOrderRequest"
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                "$ref": "#/components/schemas/Order"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Order"
+            text/json:
+              schema:
+                "$ref": "#/components/schemas/Order"
+  "/api/Order/{orderId}":
+    get:
+      tags:
+        - Order
+      summary: Get information about a specific order
+      parameters:
+        - name: orderId
+          in: path
+          description: The order ID to look up
+          required: true
+          schema:
+            type: string
+            description: The order ID to look up
+            format: uuid
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                "$ref": "#/components/schemas/Order"
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Order"
+            text/json:
+              schema:
+                "$ref": "#/components/schemas/Order"
+components:
+  schemas:
+    Company:
+      type: object
+      properties:
+        symbol:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    IssueSharesRequest:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          description: The number of shares to issue
+          format: int32
+        price:
+          type: number
+          description: The price which the shares will cost
+          format: double
+      additionalProperties: false
+      description: The payload containing how many shares and at what price to issue
+    OrderType:
+      enum:
+        - Buy
+        - Sell
+      type: string
+    OrderStatus:
+      enum:
+        - Processing
+        - Processed
+      type: string
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        companySymbol:
+          type: string
+          nullable: true
+          readOnly: true
+        minOrderPrice:
+          type: number
+          format: double
+          readOnly: true
+        maxOrderPrice:
+          type: number
+          format: double
+          readOnly: true
+        quantity:
+          type: integer
+          format: int32
+          readOnly: true
+        quantityRemaining:
+          type: integer
+          format: int32
+        orderType:
+          "$ref": "#/components/schemas/OrderType"
+        orderStatus:
+          "$ref": "#/components/schemas/OrderStatus"
+      additionalProperties: false
+    CreateOrderRequest:
+      type: object
+      properties:
+        symbol:
+          type: string
+          description: The symbol representing the company that the order is for
+          nullable: true
+        minOrderPrice:
+          type: number
+          description: The minimum price that the order should be considered for
+          format: double
+        maxOrderPrice:
+          type: number
+          description: The maximum price that the order should be considered for
+          format: double
+        quantity:
+          type: integer
+          description: The number of shares to place the order for
+          format: int32
+        orderType:
+          "$ref": "#/components/schemas/OrderType"
+      additionalProperties: false
+      description: The payload containing information about the order to create
