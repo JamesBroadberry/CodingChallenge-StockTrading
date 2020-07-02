@@ -51,6 +51,7 @@ A report of the test coverage can be found [here](TestCoverage.zip).
 If I were to continue working on this, I'd do the following:
 
 - **Add data validation to the API**
+- **Update response code for POST requests to return 201 instead of 200**
 - Instead of returning null in some cases, I'd throw a custom "NotFound" exception and handle that appropriately (e.g. re-throwing or handling it in the API using a custom exception middleware)
 - Ask for clarity on how shares are issued and other questions based on assumptions made previously.
 - Write integration tests for the API.
@@ -58,3 +59,11 @@ If I were to continue working on this, I'd do the following:
 - Understand why orders have min and max prices rather than just a set price.
 - Separate the models in the DataAccess layer from those returned from the API (e.g. not returning the Order object)
 - Clone objects sent to the DataAccess layer instead of using the existing object
+
+## Feedback
+
+This solution met the requirements and was successful. However, wider knowledge around other architectures would have helped in discussion.
+
+- Could have looked into different architecture types such as clean/onion architecture to invert dependency on data persistence
+- Could have looked into Event Sourcing since this is typically an event-driven system
+- Could have looked into CQRS and applied that architecture (although that could have been overkill for this) but knowledge of it would have helped
